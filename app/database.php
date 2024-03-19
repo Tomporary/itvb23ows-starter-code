@@ -10,7 +10,7 @@ function set_state($state) {
     $_SESSION['board'] = $b;
     $_SESSION['player'] = $c;
 }
-
-return new mysqli('localhost', 'root', '', 'hive');
-
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+return new mysqli('db', 'root', '', 'hive');
+	
 ?>
