@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
 				echo 'Building'
-                sh 'docker compose up'
+                sh 'composer install'
             }
         }
 		stage('Test') {
@@ -18,5 +18,16 @@ pipeline {
             }
         }
     }
+	post {
+		always {
+			echo 'Pipeline finished'
+		}
+		success {
+			echo 'Success'
+		}
+		failure {
+			echo 'Failure'
+		}
+	}
 }
 
