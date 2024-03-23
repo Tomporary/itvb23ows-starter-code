@@ -6,6 +6,15 @@ pipeline {
 				echo 'Building'
             }
         }
+		stage('SonarQube Analysis') {
+			steps {
+				script { scannerHome = tool 'Ontwikkelstraat-scanner'; }
+				withSonarQubeEnv(''SonarQube') {
+					sh "${scannerHome}/bin/sonar-scanner
+						-Dsonar.projectKey=Ontwikkelstraten"
+				}
+			}
+		}
 		stage('Test') {
             steps {
                 echo 'Testing'
