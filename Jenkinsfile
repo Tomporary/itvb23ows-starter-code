@@ -9,7 +9,7 @@ pipeline {
 		stage('SonarQube Analysis') {
 			steps {
 				script { scannerHome = tool 'Ontwikkelstraat-scanner'; }
-				withSonarQubeEnv(''SonarQube') {
+				withSonarQubeEnv('SonarQube') {
 					sh "${scannerHome}/bin/sonar-scanner
 						-Dsonar.projectKey=Ontwikkelstraten"
 				}
