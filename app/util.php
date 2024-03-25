@@ -7,11 +7,9 @@ function isNeighbour($a, $b) {
     $b = explode(',', $b);
     if ($a[0] == $b[0] && abs($a[1] - $b[1]) == 1 ||
         $a[1] == $b[1] && abs($a[0] - $b[0]) == 1 ||
-        $a[0] + $a[1] == $b[0] + $b[1]) 
+        $a[0] + $a[1] == $b[0] + $b[1])
     {
         return true;
-    } else {
-        return false;
     }
 }
 
