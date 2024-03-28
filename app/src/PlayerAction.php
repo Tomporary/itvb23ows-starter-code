@@ -34,7 +34,7 @@ class PlayerAction
             case 'Undo':
                 $this->undo();
                 break;
-            case 'default':
+            default:
                 $_SESSION['error'] = 'An unknown action was posted.';
                 break;
         }

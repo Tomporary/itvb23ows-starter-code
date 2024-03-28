@@ -10,7 +10,7 @@ class DatabaseHandler
 
     public function __construct()
     {
-        $this->connection = new mysqli('db', 'root', 'pass', 'hive');
+        $this->connection = new mysqli('db', 'root', '', 'hive');
     }
 
     public function getState() {
