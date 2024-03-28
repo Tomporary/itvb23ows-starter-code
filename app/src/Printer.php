@@ -15,9 +15,7 @@ class Printer
 
     public function printMoveHistory()
     {
-        $stmt = $this->db->getConnection()->prepare('SELECT * FROM moves WHERE game_id = '.$_SESSION['game_id']);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $result = $this->db->getMoveHistory();
         while ($row = $result->fetch_array()) {
             echo '<li>'.$row[2].' '.$row[3].' '.$row[4].'</li>';
         }

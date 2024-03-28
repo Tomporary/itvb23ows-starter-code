@@ -24,6 +24,13 @@ class DatabaseHandler
         $_SESSION['player'] = $c;
     }
 
+    public function getMoveHistory() {
+        $stmt = $this->connection->prepare('SELECT * FROM moves WHERE game_id = '.$_SESSION['game_id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result;
+    }
+
     public function getConnection()
     {
         return $this->connection;
