@@ -17,7 +17,7 @@ pipeline {
 		stage('Test') {
             steps {
                 echo 'Testing'
-            }
+				sh 'app/vendor/bin/phpunit app/tests/.'
         }
         stage('Deploy') {
             steps {
