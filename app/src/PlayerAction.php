@@ -6,7 +6,7 @@ class PlayerAction
 {
     private DatabaseHandler $db;
 
-    public function __construct($db) 
+    public function __construct($db)
     {
         $this->db = $db;
     }
@@ -33,6 +33,9 @@ class PlayerAction
                 break;
             case 'Undo':
                 $this->undo();
+                break;
+            case 'default':
+                $_SESSION['error'] = 'An unknown action was posted.';
                 break;
         }
     }
@@ -171,5 +174,4 @@ class PlayerAction
         $_SESSION['last_move'] = $result[5];
         setState($result[6]);
     }
-
 }

@@ -74,12 +74,6 @@ class Printer
 
     public function printMoveFrom()
     {
-        // foreach (array_filter($this->game->getBoard()) as $pos => $tile) {
-        //     $h = count($tile);
-        //     if ($tile[$h-1][0] == $this->game->getPlayer()){
-        //         echo "<option value=\"$pos\">$pos</option>";
-        //     }
-        // }
         foreach (array_keys($this->game->getBoard()) as $pos) {
             echo "<option value=\"$pos\">$pos</option>";
         }
@@ -87,14 +81,6 @@ class Printer
 
     public function printPlayTo()
     {
-        // foreach ($this->game->getMovesTo() as $pos) {
-        //     if (empty($this->game->getBoard())){
-        //         echo "<option value=\"$pos\">$pos</option>";
-        //     }
-        //     elseif(!in_array($pos, $this->game->getBoard())) {
-        //         echo "<option value=\"$pos\">$pos</option>";
-        //     }
-        // }
         foreach ($this->game->getPossibleDestinations() as $pos) {
             echo "<option value=\"$pos\">$pos</option>";
         }
@@ -102,11 +88,6 @@ class Printer
 
     public function printPiecesRemaining()
     {
-        // foreach ($this->game->getHand()[$this->game->getPlayer()] as $tile => $ct) {
-        //     if ($ct > 0) {
-        //         echo "<option value=\"$tile\">$tile</option>";
-        //     }
-        // }
         foreach ($this->game->getHand()[$this->game->getPlayer()] as $tile => $ct) {
             echo "<option value=\"$tile\">$tile</option>";
         }

@@ -8,15 +8,16 @@ class HiveGame
     private $board = [];
     private $player = [];
     private $possibleDestinations = [];
-    private $game_id = 0;
+    private $gameId = 0;
     private DatabaseHandler $db;
 
-    function __construct($db)
+    public function __construct($db)
     {
         $this->db = $db;
         if (!isset($_SESSION['board'])) {
             $_SESSION['board'] = [];
-            $_SESSION['hand'] = [0 => ["Q" => 1, "B" => 2, "S" => 2, "A" => 3, "G" => 3], 1 => ["Q" => 1, "B" => 2, "S" => 2, "A" => 3, "G" => 3]];
+            $_SESSION['hand'] = [0 => ["Q" => 1, "B" => 2, "S" => 2, "A" => 3, "G" => 3], 
+                                 1 => ["Q" => 1, "B" => 2, "S" => 2, "A" => 3, "G" => 3]];
             $_SESSION['player'] = 0;
             $_SESSION['game_id'] = $this->createGame();
         }

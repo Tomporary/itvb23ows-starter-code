@@ -92,13 +92,13 @@
             ?>
         </div>
         <div class="turn">
-            Turn: 
-            <?php 
+            Turn:
+            <?php
                 if ($player == $PLAYERWHITE) {
                     echo "White";
                 } else {
                     echo "Black";
-                } 
+                }
             ?>
         </div>
         <form method="post">
@@ -134,11 +134,11 @@
             <input type="submit" name="action" value="Restart">
         </form>
         <strong>
-            <?php 
+            <?php
                 if (isset($_SESSION['error'])) {
-                    echo $_SESSION['error']; 
+                    echo $_SESSION['error'];
                     unset($_SESSION['error']);
-                } 
+                }
             ?>
         </strong>
         <ol>

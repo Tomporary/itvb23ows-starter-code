@@ -19,7 +19,7 @@ services:
         restart: always
         environment:
             - MYSQL_DATABASE=hive
-            - MYSQL_ALLOW_EMPTY_PASSWORD=TRUE
+            - MYSQL_ROOT_PASSWORD=pass
         ports:
             - '3306:3306'
         volumes:
