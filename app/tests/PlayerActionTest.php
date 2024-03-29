@@ -96,6 +96,52 @@ class PlayerActionTest extends TestCase
         $this->assertEquals('B', $_SESSION['board']['0,1'][1], 'Test failed: Beetle move placement');
     }
 
+    public function testMove_GrassHopper_CorrectPlacement()
+    {
+        session_start();
+        
+        $db = new DatabaseHandler();
+        new HiveGame($db);
+        $playerAction = new PlayerAction($db);
+
+        $_SESSION['board']['0,0'] = [[0, 'Q']];
+        $_SESSION['board']['0,1'] = [[1, 'Q']];
+        $_SESSION['board']['-1,0'] = [[0, 'G']];
+        $_SESSION['board']['0,2'] = [[1, 'B']];
+        $_SESSION['board']['1,0'] = [];
+
+        $_SESSION['player'] = 0;
+        $_POST['from'] = '-1,0';
+        $_POST['to'] = '1,0';
+
+        $playerAction->move();
+
+        $this->assertEquals('G', $_SESSION['board']['1,0'][0], 'Test failed: Grasshoper correct move placement');
+    }
+
+    public function testMove_GrassHopper_IncorrectPlacement()
+    {
+        session_start();
+        
+        $db = new DatabaseHandler();
+        new HiveGame($db);
+        $playerAction = new PlayerAction($db);
+
+        $_SESSION['board']['0,0'] = [[0, 'Q']];
+        $_SESSION['board']['0,1'] = [[1, 'Q']];
+        $_SESSION['board']['-1,0'] = [[0, 'G']];
+        $_SESSION['board']['0,2'] = [[1, 'B']];
+        $_SESSION['board']['1,2'] = [];
+
+        $_SESSION['player'] = 0;
+        $_POST['from'] = '-1,0';
+        $_POST['to'] = '1,2';
+
+        $playerAction->move();
+
+        $this->assertEquals('G', $_SESSION['board']['1,2'][0], 'Test failed: Grasshopper incorrect move placement');
+    }
+
     public function testPass() 
     {
         session_start();
