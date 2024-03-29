@@ -112,6 +112,22 @@ class PlayerActionTest extends TestCase
         $this->assertEquals('Q', $_SESSION['board']['0,1'][0], 'Test failed: Play');
     }
 
+    public function testPlayQueenFourth() 
+    {
+        session_start();
+        
+        $db = new DatabaseHandler();
+        new HiveGame($db);
+        $playerAction = new PlayerAction($db);
+
+        $_POST['piece'] = 'Q';
+        $_POST['to'] = '0,1';
+
+        $playerAction->play();
+
+        $this->assertEquals('Q', $_SESSION['board']['0,1'][0], 'Test failed: PlayQueenFourth');
+    }
+
     public function testRestart() 
     {
         session_start();
