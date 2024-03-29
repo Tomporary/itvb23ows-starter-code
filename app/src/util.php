@@ -56,9 +56,14 @@ class Util
         if (!$board[$common[0]] && !$board[$common[1]] && !$board[$from] && !$board[$to]) {
             return false;
         }
-        return min( self::len($board[$common[0]]),
-                    self::len($board[$common[1]]))
-                    <= max( self::len($board[$from]),
-                    self::len($board[$to]));
+
+        if( min(self::len($board[$common[0]]),
+            self::len($board[$common[1]]))
+            <= max(self::len($board[$from]),
+            self::len($board[$to])) ||
+            explode(',', $to)[1]==explode(',', $from)[1])
+        {
+            return true;
+        }
     }
 }
