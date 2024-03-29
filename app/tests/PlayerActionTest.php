@@ -93,7 +93,7 @@ class PlayerActionTest extends TestCase
 
         $playerAction->move();
 
-        $this->assertEquals('B', $_SESSION['board']['0,1'][1], 'Test failed: Beetle move placement');
+        $this->assertEquals('B', $_SESSION['board']['0,1'][1][1], 'Test failed: Beetle move placement');
     }
 
     public function testMove_GrassHopper_CorrectPlacement()
@@ -116,7 +116,7 @@ class PlayerActionTest extends TestCase
 
         $playerAction->move();
 
-        $this->assertEquals('G', $_SESSION['board']['1,0'][0], 'Test failed: Grasshoper correct move placement');
+        $this->assertEquals('G', $_SESSION['board']['1,0'][0][1], 'Test failed: Grasshoper correct move placement');
     }
 
     public function testMove_GrassHopper_IncorrectPlacement()
@@ -139,7 +139,53 @@ class PlayerActionTest extends TestCase
 
         $playerAction->move();
 
-        $this->assertEquals('G', $_SESSION['board']['1,2'][0], 'Test failed: Grasshopper incorrect move placement');
+        $this->assertEquals('G', $_SESSION['board']['1,2'][0][1], 'Test failed: Grasshopper incorrect move placement');
+    }
+
+    public function testMove_Spider_CorrectPlacement()
+    {
+        session_start();
+        
+        $db = new DatabaseHandler();
+        new HiveGame($db);
+        $playerAction = new PlayerAction($db);
+
+        $_SESSION['board']['0,0'] = [[0, 'Q']];
+        $_SESSION['board']['0,1'] = [[1, 'Q']];
+        $_SESSION['board']['-1,0'] = [[0, 'S']];
+        $_SESSION['board']['0,2'] = [[1, 'B']];
+        $_SESSION['board']['1,0'] = [];
+
+        $_SESSION['player'] = 0;
+        $_POST['from'] = '-1,0';
+        $_POST['to'] = '-1,3';
+
+        $playerAction->move();
+
+        $this->assertEquals('S', $_SESSION['board']['-1,3'][0][1], 'Test failed: Spider correct move placement');
+    }
+
+    public function testMove_Spider_IncorrectPlacement()
+    {
+        session_start();
+        
+        $db = new DatabaseHandler();
+        new HiveGame($db);
+        $playerAction = new PlayerAction($db);
+
+        $_SESSION['board']['0,0'] = [[0, 'Q']];
+        $_SESSION['board']['0,1'] = [[1, 'Q']];
+        $_SESSION['board']['-1,0'] = [[0, 'S']];
+        $_SESSION['board']['0,2'] = [[1, 'B']];
+        $_SESSION['board']['-1,1'] = [];
+
+        $_SESSION['player'] = 0;
+        $_POST['from'] = '-1,0';
+        $_POST['to'] = '-1,1';
+
+        $playerAction->move();
+
+        $this->assertEquals('S', $_SESSION['board']['-1,1'][0][1], 'Test failed: Spider incorrect move placement');
     }
 
     public function testPass() 
