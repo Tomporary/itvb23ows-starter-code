@@ -82,9 +82,9 @@ class PlayerAction
                         $_SESSION['error'] = 'Tile must move';
                     } elseif (isset($board[$to]) && $tile[1] != "B") {
                         $_SESSION['error'] = 'Tile not empty';
-                    } elseif ($tile[1] == "Q" || $tile[1] == "B") {
-                        if (!Util::slide($board, $from, $to)) {
-                            $_SESSION['error'] = 'Tile must slide';
+                    } elseif ($tile[1] == "Q" || $tile[1] == "B" || $tile[1] == "G") {
+                        if (!Pieces::isValidMove($board, $from, $to, $tile[1])) {
+                            $_SESSION['error'] = 'invalid move';
                         }
                     }
                 }
