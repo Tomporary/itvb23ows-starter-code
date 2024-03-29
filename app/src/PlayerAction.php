@@ -133,7 +133,7 @@ class PlayerAction
 
         if (!$hand[$piece]) {
             $_SESSION['error'] = "Player does not have tile";
-        } elseif (isset($board[$to])) {
+        } elseif (isset($board[$to]) && Util::len($_SESSION['board'][$to])>0) {
             $_SESSION['error'] = 'Board position is not empty';
         } elseif (count($board) && !Util::hasNeighBour($to, $board)) {
             $_SESSION['error'] = "board position has no neighbour";

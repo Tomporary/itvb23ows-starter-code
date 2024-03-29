@@ -83,14 +83,16 @@ class Printer
 
     public function printPlayTo()
     {
-        // foreach ($this->game->getPossibleDestinations() as $pos) {
-        //     echo "<option value=\"$pos\">$pos</option>";
-        // }
         foreach ($this->game->getPossibleDestinations() as $pos) {
             if (empty($_SESSION['board'])){
                 echo "<option value=\"$pos\">$pos</option>";
             }
             elseif(!in_array($pos, array_keys($_SESSION['board']))) {
+                if(Util::neighboursAreSameColor($_SESSION['player'], $pos, $_SESSION['board']) ||
+                   $_SESSION['hand'][$_SESSION['player']]==["Q" => 1, "B" => 2, "S" => 2, "A" => 3, "G" => 3]) {
+                    echo "<option value=\"$pos\">$pos</option>";
+                }
+            } elseif(Util::len($_SESSION['board'][$pos])==0) {
                 if(Util::neighboursAreSameColor($_SESSION['player'], $pos, $_SESSION['board']) ||
                    $_SESSION['hand'][$_SESSION['player']]==["Q" => 1, "B" => 2, "S" => 2, "A" => 3, "G" => 3]) {
                     echo "<option value=\"$pos\">$pos</option>";
