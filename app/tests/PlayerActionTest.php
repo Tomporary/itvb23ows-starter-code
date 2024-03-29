@@ -244,7 +244,7 @@ class PlayerActionTest extends TestCase
         $playerAction.undo();
 
         
-        $this->assertTrue($databaseMock->getMoveHistory()==1, 'Test failed: Undo after play error');
+        $this->assertTrue(sizeof($databaseMock->getMoveHistory())==1, 'Test failed: Undo after play error');
     }
 
     public function testUndoBeforePlay() 
