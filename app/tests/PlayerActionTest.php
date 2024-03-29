@@ -8,6 +8,26 @@ use PHPUnit\Framework\TestCase;
 
 class PlayerActionTest extends TestCase
 {
+    public function testMove_Queen_NoError()
+    {
+        session_start();
+        
+        $db = new DatabaseHandler();
+        new HiveGame($db);
+        $playerAction = new PlayerAction($db);
+
+        $_SESSION['board']['0,0'] = [[0, 'Q']];
+        $_SESSION['board']['0,1'] = [[1, 'Q']];
+
+        $_SESSION['player'] = 0;
+        $_POST['from'] = '0,0';
+        $_POST['to'] = '1,0';
+
+        $playerAction->move();
+
+        $this->assertFalse(isset($_SESSION['error']), 'Test failed: Queen move error \''.$_SESSION['error'].'\'');
+    }
+    
     public function testMove_Beetle_NoError()
     {
         session_start();
