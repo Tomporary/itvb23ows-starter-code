@@ -47,11 +47,20 @@ class Pieces {
         return $straightline;
     }
 
-    private static function antValidity($board, $from, $to) {
+    private static function spiderValidity($board, $from, $to) {
+        $start = explode(",", $from);
+        $visited = [];
+        foreach ($GLOBALS['OFFSETS'] as $pq) {
+            $p = $start[0] + $pq[0];
+            $q = $start[1] + $pq[1];
+            if(Util::slide($board, $from, $to)) {
+                $visited[] = $p.",".$q;
+            }
+        }
         return false;
     }
 
-    private static function spiderValidity($board, $from, $to) {
+    private static function antValidity($board, $from, $to) {
         return false;
     }
 }
