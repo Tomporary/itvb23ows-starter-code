@@ -17,6 +17,7 @@ pipeline {
 		stage('Test') {
             steps {
                 echo 'Testing'
+				sh "chmod +x -R app/vendor/bin/phpunit"
 				sh 'app/vendor/bin/phpunit app/tests/.'
 			}
         }
