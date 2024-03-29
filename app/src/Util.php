@@ -53,15 +53,41 @@ class Util
                 $common[] = $p.",".$q;
             }
         }
-        if (!$board[$common[0]] && !$board[$common[1]] && !$board[$from] && !$board[$to]) {
-            return false;
+
+        $tmp1 = 0;
+        $tmp2 = 4;
+
+        if(in_array($common[0], array_keys($board)) ||
+           in_array($common[1], array_keys($board))) 
+        {
+            if(in_array($common[0], array_keys($board)) &&
+                in_array($common[1], array_keys($board))) {
+                $tmp1 = min(self::len($board[$common[0]]),
+                            self::len($board[$common[1]]));
+            } else {
+                $tmp1 = 0;
+            }
+        }
+        if(in_array($from, array_keys($board)) ||
+           in_array($to, array_keys($board))) 
+        {
+            if(in_array($from, array_keys($board)) &&
+               in_array($to, array_keys($board))) {
+                $tmp2 = max(self::len($board[$from]),
+                            self::len($board[$to]));
+            } elseif (in_array($from, array_keys($board))) {
+                $tmp2 = self::len($board[$from]);
+            } else {
+                $tmp2 = self::len($board[$to]);
+            }
+        }
+        if(in_array($to, array_keys($board))) {
+            if(self::len($board[$to])) {
+                $tmp4 = true;
+            }
         }
 
-        if( min(self::len($board[$common[0]]),
-            self::len($board[$common[1]]))
-            <= max(self::len($board[$from]),
-            self::len($board[$to])) ||
-            explode(',', $to)[1]==explode(',', $from)[1])
+        if($tmp1 <= $tmp2 || explode(',', $to)[1]==explode(',', $from)[1])
         {
             return true;
         }
