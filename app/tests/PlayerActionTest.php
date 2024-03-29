@@ -222,5 +222,39 @@ class PlayerActionTest extends TestCase
         $this->assertEmpty($hist, 'Test failed: Restart');
     }
 
-    // public function testUndo() {}
+    public function testUndoAfterPlay() 
+    {
+        $databaseMock = self::createMock(DatabaseHandler::class);
+        $game = new HiveGame($databaseMock);
+        $playerAction = new PlayerAction($db);
+
+        $_SESSION['board']['0,0'] = [[0, 'Q']];
+        $_SESSION['board']['0,1'] = [[1, 'Q']];
+
+        $_SESSION['player'] = 0;
+        $_POST['from'] = '0,0';
+        $_POST['to'] = '1,0';
+        $playerAction->move();
+
+        $_SESSION['player'] = 1;
+        $_POST['from'] = '0,1';
+        $_POST['to'] = '1,1';
+        $playerAction->move();
+
+        $playerAction.undo();
+
+        
+        $this->assertTrue($databaseMock->getMoveHistory()==1, 'Test failed: Undo after play error');
+    }
+
+    public function testUndoBeforePlay() 
+    {
+        $databaseMock = self::createMock(DatabaseHandler::class);
+        $game = new HiveGame($databaseMock);
+        $playerAction = new PlayerAction($db);
+
+        $playerAction.undo();
+
+        $this->assertTrue(isset($_SESSION['error']), 'Test failed: Undo Before play error');
+    }
 }
